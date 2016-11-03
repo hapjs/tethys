@@ -1,0 +1,23 @@
+{
+  "name": "tethys",
+  "version": "0.0.1",
+  "description": "mini dom library",
+  "main": "tethys.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hapjs/tethys.git"
+  },
+  "keywords": [
+    "mini",
+    "dom"
+  ],
+  "author": "hapjs",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hapjs/tethys/issues"
+  },
+  "homepage": "https://github.com/hapjs/tethys#readme"
+}
