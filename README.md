@@ -2,9 +2,9 @@
 
 一个小型库，包含最常用的dom操作： `each`, `on`, `css`, `hasClass`, `addClass`, `removeClass`
 
-`tethys.js` (3KB), 
+`tethys.js` (5KB), 
 
-`tethys.mn.js` (1KB)
+`tethys.mn.js` (2KB)
 
 https://www.npmjs.com/package/tethys
 
@@ -57,7 +57,7 @@ $('button').on('click', function(){
 });
 ```
 
-## 样式修改
+## 样式
 
 ```js
 // 属性名，属性值
@@ -68,9 +68,27 @@ $('button').css({
     display: 'block',
     border: '1px solid green'
 });
+
+// 查询
+$('button').css('color'); // red
 ```
 
-## class操作
+## 属性
+
+```js
+// 单个属性操作
+$('button').attr('maxlength', 16);
+
+// 多个属性操作
+$('button').attr({
+    'maxlength': 16
+});
+
+// 查询
+$('button').attr('maxlength'); // 16
+```
+
+## class
 
 ```js
 // 添加class
@@ -83,6 +101,22 @@ $('button').removeClass('active');
 if($('button').hasClass('active')){
     console.log('yes');
 };
+```
+
+## 显示/隐藏
+
+```js
+// 隐藏
+$('button').hide();
+
+// 显示
+$('button').show();
+```
+
+## 设置html
+
+```js
+$('button').html('<p>Hello world!</p>');
 ```
 
 ## 链式调用

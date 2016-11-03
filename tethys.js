@@ -51,7 +51,9 @@
             events = events.split(/\s*\,\s*/);
 
             return this.each(function(el){
+
                 fn = fn.bind(el);
+
                 events.forEach(function(event){
                     el.addEventListener(event, fn);
                 });
@@ -62,10 +64,19 @@
         // css('color', 'red')
         // css({ color: 'red' })
         css: function(key, value){
-            var attrs = {}, keys;
+            var attrs = {}, 
+                keys, 
+                format = function(key){
+                    return key.replace(/(-([a-z]))/g, function(s, s1, s2){
+                        return s2.toUpperCase();
+                    });
+                };
             
             if(typeof key === 'object'){
                 attrs = key;
+            }else if(arguments.length === 1){
+                key = format(key);
+                return this._nodes[0] ? this._nodes[0].style[key] : null;
             }else{
                 attrs[key] = value;
             };
@@ -75,12 +86,8 @@
             return this.each(function(el){
                 keys.forEach(function(key){
                     var val = attrs[key] + '';
-                    // backgroundColor 格式转成 background-color 格式
-                    key = key.replace(/(-([a-z]))/g, function(s, $0, $1){
-                        return $1.toUpperCase();
-                    });
                     // 设置样式
-                    el.style[key] = val;
+                    el.style[format(key)] = val;
                 });
             });
         },
@@ -140,6 +147,27 @@
         // 隐藏
         hide: function(){
             return this.css('display', 'none');
+        },
+
+        // 设置或者返回属性
+        attr: function(key, value){
+            var attrs = {}, keys;
+            
+            if(typeof key === 'object'){
+                attrs = key;
+            }else if(arguments.length === 1){
+                return this._nodes[0] ? this._nodes[0].getAttribute(key) : null;
+            }else{
+                attrs[key] = value;
+            };
+
+            keys = Object.keys(attrs);
+            
+            return this.each(function(el){
+                keys.forEach(function(key){
+                    el.setAttribute(key, attrs[key] + '');
+                });
+            });
         }
 
     };

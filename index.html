@@ -24,19 +24,27 @@
     hello world!
     <button class="red">hello</button>
 
-    <script src="tethys.min.js"></script>
+    <script src="tethys.js"></script>
     <script>
         $('button').on('click', function(){
 
             $('body').css({
                 'background-color': 'green'
             }).css('font-size', '22px');
+
+            console.log($('body').css('background-color'));
             
             console.log('hasClass red ' + $(this).hasClass('red'));
 
             $(this).addClass('no-margin').removeClass('red');
 
             console.log('hasClass red ' + $(this).hasClass('red'));
+
+            $(this).attr('name', 'hap').attr({
+                age: 18
+            });
+
+            console.log($(this).attr('name'));
         });
     </script>
 </body>
