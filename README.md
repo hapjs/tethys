@@ -39,7 +39,7 @@ $('style', document.head);
 
 ```js
 $('script').each(function(script, index){
-    console.log(this.getAttribute('type));
+    console.log(this.getAttribute('type'));
 });
 ```
 
@@ -65,6 +65,7 @@ $('button').css({
 ```
 
 ## class操作
+
 ```js
 // 添加class
 $('button').addClass('active');
