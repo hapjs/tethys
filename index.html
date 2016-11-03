@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        button{
+            margin: 20px;
+        }
+        .no-margin{
+            margin: 0;
+        }
+        .red{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    hello world!
+    <button class="red">hello</button>
+
+    <script src="tethys.min.js"></script>
+    <script>
+        $('button').on('click', function(){
+
+            $('body').css({
+                'background-color': 'green'
+            }).css('font-size', '22px');
+            
+            console.log('hasClass red ' + $(this).hasClass('red'));
+
+            $(this).addClass('no-margin').removeClass('red');
+
+            console.log('hasClass red ' + $(this).hasClass('red'));
+        });
+    </script>
+</body>
+</html>
