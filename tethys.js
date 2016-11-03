@@ -15,6 +15,29 @@
 }(this, function() {
     'use strict';
 
+    function keyValue(args, getter, setter){
+        var attrs = {}, 
+            keys, 
+            key = args[0], 
+            value = args[1];
+        
+        if(typeof key === 'object'){
+            attrs = key;
+        }else if(args.length === 1){
+            return this[0] ? getter(this[0]) : null;
+        }else{
+            attrs[key] = value;
+        };
+
+        keys = Object.keys(attrs);
+        
+        return this.each(function(el){
+            keys.forEach(function(key){
+                setter(el, key, attrs);
+            });
+        });
+    };
+
     // 查找节点，返回一个可操作的节点数组
     function tethys(selector, context){
 
@@ -88,31 +111,27 @@
         // css('color', 'red')
         // css({ color: 'red' })
         css: function(key, value){
-            var attrs = {}, 
-                keys, 
-                format = function(key){
-                    return key.replace(/(-([a-z]))/g, function(s, s1, s2){
-                        return s2.toUpperCase();
-                    });
-                };
             
-            if(typeof key === 'object'){
-                attrs = key;
-            }else if(arguments.length === 1){
-                key = format(key);
-                return this[0] ? this[0].style[key] : null;
-            }else{
-                attrs[key] = value;
+            var format = function(key){
+                return key.replace(/(-([a-z]))/g, function(s, s1, s2){
+                    return s2.toUpperCase();
+                });
             };
 
-            keys = Object.keys(attrs);
-            
-            return this.each(function(el){
-                keys.forEach(function(key){
-                    var val = attrs[key] + '';
-                    // 设置样式
-                    el.style[format(key)] = val;
-                });
+            return keyValue.call(this, arguments, function(el){
+                return el.style[format(key)];
+            }, function(el, key, attrs){
+                el.style[format(key)] = attrs[key] + '';
+            });
+        },
+
+        // 设置或者返回属性
+        attr: function(key, value){
+
+            return keyValue.call(this, arguments, function(el){
+                return el.getAttribute(key);
+            }, function(el, key, attrs){
+                el.setAttribute(key, attrs[key] + '');
             });
         },
 
@@ -179,27 +198,6 @@
                     el.setAttribute('o-d', el.style.display);
                     el.style.display = 'none';
                 };
-            });
-        },
-
-        // 设置或者返回属性
-        attr: function(key, value){
-            var attrs = {}, keys;
-            
-            if(typeof key === 'object'){
-                attrs = key;
-            }else if(arguments.length === 1){
-                return this[0] ? this[0].getAttribute(key) : null;
-            }else{
-                attrs[key] = value;
-            };
-
-            keys = Object.keys(attrs);
-            
-            return this.each(function(el){
-                keys.forEach(function(key){
-                    el.setAttribute(key, attrs[key] + '');
-                });
             });
         }
 
