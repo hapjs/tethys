@@ -123,6 +123,23 @@
         // 删除class
         removeClass: function(cls){
             return this.addClass(cls, 'remove');
+        },
+
+        // 设置html
+        html: function(html){
+            return this.each(function(el){
+                el.innerHTML = html;
+            });
+        },
+        
+        // 显示
+        show: function(){
+            return this.css('display', '');
+        },
+      
+        // 隐藏
+        hide: function(){
+            return this.css('display', 'none');
         }
 
     };
