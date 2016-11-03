@@ -1,14 +1,20 @@
 # tethys 
 
-一个小型库，包含最常用的dom操作： `each`, `on`, `css`, `hasClass`, `addClass`, `removeClass`
+这是一个微型的库，包含最常用的dom操作，压缩后`2KB`。
 
-`tethys.js` (5KB), 
+## 起源
 
-`tethys.mn.js` (2KB)
+自从 `angular`、`vue` 这类框架出现之后，我们终于不用再面对`业务逻辑`与`dom操作`混杂的代码。
 
-https://www.npmjs.com/package/tethys
+但是，在极少的时候，特别是在组件中，我们仍然想要对页面元素进行直接的处理。
+
+可是，你又不想仅仅为了用到几个方法，就去引入几十KB的`zepto`或上百K的`jquery`。
+
+于是就有了`tethys`。
 
 ## 安装
+
+https://www.npmjs.com/package/tethys
 
 ```bash
 npm i tethys
@@ -27,7 +33,7 @@ Node.js/Webpack/Rollup
 var $ = require('tethys');
 ```
 
-## 查找
+## 查找元素
 
 ```js
 // 通过选择器查找
