@@ -2,6 +2,10 @@
 
 一个小型库，包含最常用的dom操作： `each`, `on`, `css`, `hasClass`, `addClass`, `removeClass`
 
+tethys.js     (3KB)
+
+tethys.mn.js  (1KB)
+
 ## 安装
 
 ```bash
