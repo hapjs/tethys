@@ -15,32 +15,56 @@
 }(this, function() {
     'use strict';
 
-    function Tethys(){};
+    // 查找节点，返回一个可操作的节点数组
+    function tethys(selector, context){
 
-    Tethys.prototype = {
+        var nodes = [];
+        
+        if(typeof selector === 'string'){
 
-        // 查询
-        query: function(selector, context){
+            nodes = (context || document).querySelectorAll(selector);
+        }else{
 
-            if(typeof context === 'string'){
-                context = document.querySelector(context);
-            };
+            nodes = [selector];
+        };
 
-            if(typeof selector === 'string'){
+        tethys.extend(nodes, tethys.fn);
 
-                this._nodes = (context || document).querySelectorAll(selector);
-            }else{
+        return nodes;
+    };
 
-                this._nodes = [selector];
-            };
+    // 扩展
+    tethys.extend = function(){
+        var args = arguments, 
+            deep = false, 
+            dest, 
+            prop = Array.prototype;
 
-            return this;
-        },
+        if (typeof args[0] === 'boolean') {
+            deep = prop.shift.call(args);
+        };
+
+        dest = prop.shift.call(args);
+        
+        prop.forEach.call(args, function (src) {
+            Object.keys(src).forEach(function (key) {
+                if (deep && typeof src[key] === 'object' && typeof dest[key] === 'object') {
+                    extend(true, dest[key], src[key]);
+                } else if (typeof src[key] !== 'undefined') {
+                    dest[key] = src[key];
+                };
+            });
+        });
+        return dest;
+    };
+
+    // 
+    tethys.fn = {
 
         // 遍历
         each: function(fn){
             
-            Array.prototype.forEach.call(this._nodes || [], fn);
+            Array.prototype.forEach.call(this || [], fn);
 
             return this;
         },
@@ -76,7 +100,7 @@
                 attrs = key;
             }else if(arguments.length === 1){
                 key = format(key);
-                return this._nodes[0] ? this._nodes[0].style[key] : null;
+                return this[0] ? this[0].style[key] : null;
             }else{
                 attrs[key] = value;
             };
@@ -165,7 +189,7 @@
             if(typeof key === 'object'){
                 attrs = key;
             }else if(arguments.length === 1){
-                return this._nodes[0] ? this._nodes[0].getAttribute(key) : null;
+                return this[0] ? this[0].getAttribute(key) : null;
             }else{
                 attrs[key] = value;
             };
@@ -181,10 +205,6 @@
 
     };
 
-    return function(selector, context){
-        
-        return new Tethys().query(selector, context);
-        
-    };
+    return tethys;
 
 }));
