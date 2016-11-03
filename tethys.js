@@ -141,12 +141,21 @@
         
         // 显示
         show: function(){
-            return this.css('display', '');
+            return this.each(function(el){
+                if(el.style.display === 'none'){
+                    el.style.display = el.getAttribute('o-d') || '';
+                };
+            });
         },
       
         // 隐藏
         hide: function(){
-            return this.css('display', 'none');
+            return this.each(function(el){
+                if(el.style.display !== 'none') {
+                    el.setAttribute('o-d', el.style.display);
+                    el.style.display = 'none';
+                };
+            });
         },
 
         // 设置或者返回属性
