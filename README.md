@@ -21,8 +21,8 @@
 * [hasClass](#class)
 * [addClass](#class)
 * [removeClass](#class)
-* [show](#show/hide)
-* [hide](#show/hide)
+* [show](#showhide)
+* [hide](#showhide)
 * [html](#html)
 
 和以下静态方法：
@@ -109,15 +109,13 @@ $('button').on('click', function(){
 
 ## css
 
-样式处理
-
-单个样式：
+设置单个样式
 
 ```js
 $('button').css('color', 'red');
 ```
 
-多个样式：
+设置多个样式
 
 ```js
 $('button').css({
@@ -126,7 +124,7 @@ $('button').css({
 });
 ```
 
-取样式：
+取样式
 
 ```js
 $('button').css('color'); // red
@@ -134,15 +132,13 @@ $('button').css('color'); // red
 
 ## attr
 
-属性处理
-
-单个属性：
+设置单个属性
 
 ```js
 $('button').attr('maxlength', 16);
 ```
 
-多个属性：
+设置多个属性
 
 ```js
 $('button').attr({
@@ -158,19 +154,19 @@ $('button').attr('maxlength'); // 16
 
 ## class
 
-添加class：
+添加class
 
 ```js
 $('button').addClass('active');
 ```
 
-删除class：
+删除class
 
 ```js
 $('button').removeClass('active');
 ```
 
-判断是否存在指定class：
+判断是否存在指定class
 
 ```js
 $('button').hasClass('active'); // true
