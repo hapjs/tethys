@@ -8,9 +8,26 @@
 
 但是，在极少的时候，特别是在组件中，我们仍然想要对页面元素进行直接的处理。
 
-可是，你又不想仅仅为了用到几个方法，就去引入几十KB的`zepto`或上百K的`jquery`。
+可是，你又不想仅仅为了用到几个方法，就去引入几十K的`zepto`或上百K的`jquery`。
 
-于是就有了`tethys`。
+这种情况下，`tethys`是一个不错的选择。
+
+它包含以下实例方法：
+
+* [each](#each)
+* [on](#on)
+* [css](#css)
+* [attr](#attr)
+* [hasClass](#class)
+* [addClass](#class)
+* [removeClass](#class)
+* [show](#show/hide)
+* [hide](#show/hide)
+* [html](#html)
+
+和以下静态方法：
+
+* [extend](#extend)
 
 ## 安装
 
@@ -70,7 +87,9 @@ $('style', document.head);
 
 与jQuery类似，你将得到一个包含查找到的节点的数组，这个数组有下列方法供你操作：
 
-## 遍历
+## each
+
+遍历
 
 ```js
 $('script').each(function(script, index){
@@ -78,7 +97,9 @@ $('script').each(function(script, index){
 });
 ```
 
-## 事件绑定
+## on
+
+事件绑定
 
 ```js
 $('button').on('click', function(){
@@ -86,15 +107,17 @@ $('button').on('click', function(){
 });
 ```
 
-## 样式
+## css
 
-单个样式
+样式处理
+
+单个样式：
 
 ```js
 $('button').css('color', 'red');
 ```
 
-多个样式
+多个样式：
 
 ```js
 $('button').css({
@@ -103,22 +126,23 @@ $('button').css({
 });
 ```
 
-取样式
+取样式：
 
 ```js
 $('button').css('color'); // red
 ```
 
-## 属性
+## attr
 
+属性处理
 
-单个属性操作
+单个属性：
 
 ```js
 $('button').attr('maxlength', 16);
 ```
 
-多个属性操作
+多个属性：
 
 ```js
 $('button').attr({
@@ -126,7 +150,7 @@ $('button').attr({
 });
 ```
 
-查询
+取属性：
 
 ```js
 $('button').attr('maxlength'); // 16
@@ -134,25 +158,25 @@ $('button').attr('maxlength'); // 16
 
 ## class
 
-添加class
+添加class：
 
 ```js
 $('button').addClass('active');
 ```
 
-删除class
+删除class：
 
 ```js
 $('button').removeClass('active');
 ```
 
-判断是否存在指定class
+判断是否存在指定class：
 
 ```js
-var active = $('button').hasClass('active');
+$('button').hasClass('active'); // true
 ```
 
-## 显示/隐藏
+## show/hide
 
 显示
 
@@ -166,7 +190,9 @@ $('button').show();
 $('button').hide();
 ```
 
-## 设置html
+## html
+
+修改文档的innerHTML
 
 ```js
 $('button').html('<p>Hello world!</p>');
