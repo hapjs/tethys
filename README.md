@@ -14,29 +14,37 @@
 
 ## 安装
 
-https://www.npmjs.com/package/tethys
+如果在Node.js环境中使用，通过以下命令安装它。
 
 ```bash
 npm i tethys
 ```
 
+https://www.npmjs.com/package/tethys
+
 ## 引用
 
-###浏览器环境：
+### 标签引入：
 
 ```html
 <script src="https://raw.githubusercontent.com/hapjs/tethys/master/tethys.min.js"></script>
 ```
 
-通过script方式引入的话，你可以通过全局变量`tethys`来调用它。
+如果通过script方式引入，你可以通过全局变量`tethys`来调用它。
 
-同时，如果全局的`$`没有被其它库或者变量占用的话，那么`$`也会指向`tethys`，毕竟这个符号我们已经用顺手了。
+如果全局变量`$`没有被其它库或者变量占用的话，那么`$`会指向`tethys`。
 
 
-###Node.js/Webpack/Rollup环境：
+### CommonJS/CMD/AMD引入：
 
 ```js
 var $ = require('tethys');
+```
+
+### ES6引入：
+
+```js
+import $ from 'tethys';
 ```
 
 ## 查找元素
