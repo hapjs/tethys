@@ -199,8 +199,14 @@
                     el.style.display = 'none';
                 };
             });
-        }
-
+        },
+        // 切换显示隐藏
+        toggle: function(){
+            return this.each(function(el){
+                var e = $(el);
+                e.css("display") == "none" ? e.show() : e.hide();
+            });
+        },
     };
 
     return tethys;
