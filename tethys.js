@@ -200,6 +200,7 @@
                 };
             });
         },
+
         // 切换显示隐藏
         toggle: function(){
             return this.each(function(el){
@@ -207,6 +208,21 @@
                 e.css("display") == "none" ? e.show() : e.hide();
             });
         },
+
+        // 追加节点
+        append: function(child){
+            var parser;
+
+            if(typeof child === 'string'){
+                parser = new DOMParser();
+                child = parser.parseFromString(child, "text/xml").firstChild;
+            };
+
+            return this.each(function(el){
+                el.appendChild(child);
+            });
+        }
+
     };
 
     return tethys;
