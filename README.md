@@ -1,6 +1,6 @@
 # tethys 
 
-这是一个微型的库，包含最常用的dom操作，压缩后只有`2KB`。
+这是一个微型的库，包含最常用的dom操作，压缩后只有`3KB`。
 
 ## 起源
 
@@ -14,6 +14,7 @@
 
 它包含以下实例方法：
 
+* [find](#find)
 * [each](#each)
 * [on](#on)
 * [css](#css)
@@ -24,6 +25,7 @@
 * [show](#showhide)
 * [hide](#showhide)
 * [html](#html)
+* [append](#append)
 
 和以下静态方法：
 
@@ -86,6 +88,15 @@ $('style', document.head);
 ```
 
 与jQuery类似，你将得到一个包含查找到的节点的数组，这个数组有下列方法供你操作：
+
+## find
+
+查找子元素
+
+```js
+$('head').find('script'); // 查找<head>中的所有<script>
+```
+
 
 ## each
 
@@ -192,6 +203,14 @@ $('button').hide();
 
 ```js
 $('button').html('<p>Hello world!</p>');
+```
+
+## append
+
+追加子元素
+
+```js
+$('button').append('<p>Hello world!</p>');
 ```
 
 ## 链式调用

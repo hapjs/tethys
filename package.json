@@ -4,7 +4,8 @@
   "description": "mini dom library",
   "main": "tethys.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "uglify": "./node_modules/uglify-js/bin/uglifyjs tethys.js --compress --mangle -o tethys.min.js"
   },
   "repository": {
     "type": "git",
@@ -21,8 +22,6 @@
   },
   "homepage": "https://github.com/hapjs/tethys#readme",
   "devDependencies": {
-    "gulp": "^3.9.1",
-    "gulp-rename": "^1.2.2",
-    "gulp-uglify": "^2.0.0"
+    "uglify-js": "^2.7.4"
   }
 }
