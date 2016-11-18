@@ -281,6 +281,11 @@
         // 获取对象宽度
         width: function(){
             return this[0] ? this[0].clientWidth : 0;
+        },
+
+        // 获取对象高度
+        height: function(){
+            return this[0] ? this[0].clientHeight : 0;
         }
     };
 
