@@ -276,6 +276,11 @@
             });
 
             return tethys(nodes);
+        },
+
+        // 获取对象宽度
+        width: function(){
+            return this[0] ? this[0].clientWidth : 0;
         }
     };
 
