@@ -16,7 +16,8 @@
 }(this, function() {
     'use strict';
 
-    function keyValue(args, getter, setter) {
+    // 
+    function _keyValue(args, getter, setter) {
         var attrs = {},
             keys,
             key = args[0],
@@ -37,6 +38,17 @@
                 setter(el, key, attrs);
             });
         });
+    };
+
+    // 设置或读取css属性值
+    function _cssValue(name, val){
+        if(typeof val === 'number'){
+            return this.css(name, val + 'px');
+        }else if(this[0]){
+            return +window.getComputedStyle(this[0])[name].replace(/px$/, '');
+        }else{
+            return 0;
+        };
     };
 
     // 查找节点，返回一个可操作的节点数组
@@ -161,7 +173,7 @@
                 });
             };
 
-            return keyValue.call(this, arguments, function(el) {
+            return _keyValue.call(this, arguments, function(el) {
                 return el.style[format(key)];
             }, function(el, key, attrs) {
                 el.style[format(key)] = attrs[key] + '';
@@ -171,7 +183,7 @@
         // 设置或者返回属性
         attr: function(key, value) {
 
-            return keyValue.call(this, arguments, function(el) {
+            return _keyValue.call(this, arguments, function(el) {
                 return el.getAttribute(key);
             }, function(el, key, attrs) {
                 el.setAttribute(key, attrs[key] + '');
@@ -279,13 +291,13 @@
         },
 
         // 获取对象宽度
-        width: function(){
-            return this[0] ? this[0].clientWidth : 0;
+        width: function(val){
+            return _cssValue.call(this, 'width', val);
         },
 
         // 获取对象高度
-        height: function(){
-            return this[0] ? this[0].clientHeight : 0;
+        height: function(val){
+            return _cssValue.call(this, 'height', val);
         }
     };
 
