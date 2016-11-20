@@ -16,40 +16,58 @@
 }(this, function() {
     'use strict';
 
-    // 
-    function _keyValue(args, getter, setter) {
+    function inArray(array, item){
+        var yes = false;
+        Array.prototype.forEach.call(array, function(n){
+            if(n === item) yes = true;
+        });
+        return yes;
+    }
+
+    // "font-size" to "fontSize"
+    function camelCase(key) {
+        return key.replace(/(-([a-z]))/g, function(s, s1, s2) {
+            return s2.toUpperCase();
+        });
+    };
+
+    // 查询/设置：单个/多个值
+    function valueHandler(args, getter, setter) {
         var attrs = {},
             keys,
             key = args[0],
             value = args[1];
 
         if (typeof key === 'object') {
+            // 设置多个值
             attrs = key;
-        } else if (args.length === 1) {
-            return this[0] ? getter(this[0]) : null;
-        } else {
+        } else if (args.length > 1) {
+            // 设置单个值
             attrs[key] = value;
+        } else {
+            // 查询单个值
+            return this[0] && key ? getter(this[0], key) : null;
         };
 
         keys = Object.keys(attrs);
 
+        // 设置值
         return this.each(function(el) {
             keys.forEach(function(key) {
-                setter(el, key, attrs);
+                setter(el, key, value);
             });
         });
     };
 
-    // 设置或读取css属性值
-    function _cssValue(name, val){
-        if(typeof val === 'number'){
-            return this.css(name, val + 'px');
-        }else if(this[0]){
-            return +window.getComputedStyle(this[0])[name].replace(/px$/, '');
-        }else{
-            return 0;
-        };
-    };
+    // 获取最终样式
+    function getComputedStyle(el, name){
+        return (window.getComputedStyle(el) || {})[name];
+    }
+
+    // 获取数值部分
+    function getNumber(val){
+        return +val.replace(/\D*$/g, '');
+    }
 
     // 查找节点，返回一个可操作的节点数组
     function tethys(selector, context) {
@@ -162,31 +180,36 @@
             });
         },
 
-        // 设置css
+        // 查询/设置元素的实际样式
+        // css('color')
         // css('color', 'red')
         // css({ color: 'red' })
         css: function(key, value) {
-
-            var format = function(key) {
-                return key.replace(/(-([a-z]))/g, function(s, s1, s2) {
-                    return s2.toUpperCase();
-                });
-            };
-
-            return _keyValue.call(this, arguments, function(el) {
-                return el.style[format(key)];
-            }, function(el, key, attrs) {
-                el.style[format(key)] = attrs[key] + '';
+            return valueHandler.call(this, arguments, function(el) {
+                // 查询样式
+                return getComputedStyle(el, camelCase(key));
+            }, function(el, key, val) {
+                // 设置样式
+                el.style[camelCase(key)] = val + '';
             });
         },
 
-        // 设置或者返回属性
-        attr: function(key, value) {
+        // 查询元素的内联样式
+        style: function(key) {
+            return this[0] ? this[0].style[camelCase(key)] : '';
+        },
 
-            return _keyValue.call(this, arguments, function(el) {
+        // 查询/设置attribute
+        // attr('maxlength')
+        // attr('maxlength', '12')
+        // attr({ maxlength: '12' })
+        attr: function(key, value) {
+            return valueHandler.call(this, arguments, function(el, key) {
+                // 查询属性
                 return el.getAttribute(key);
-            }, function(el, key, attrs) {
-                el.setAttribute(key, attrs[key] + '');
+            }, function(el, key, val) {
+                // 设置属性
+                el.setAttribute(key, val);
             });
         },
 
@@ -288,18 +311,21 @@
             });
 
             return tethys(nodes);
-        },
-
-        // 获取对象宽度
-        width: function(val){
-            return _cssValue.call(this, 'width', val);
-        },
-
-        // 获取对象高度
-        height: function(val){
-            return _cssValue.call(this, 'height', val);
         }
     };
+
+    // 设置/查询：宽度/高度
+    ['width', 'height'].forEach(function(name){
+        tethys.fn[name] = function(val){
+            // 如果有参数且参数时数值，设置样式，并且单位为px
+            if(typeof val === 'number'){
+                return this.css(name, val + 'px');
+            }else{
+                // 否则，返回实际样式的数值
+                return getNumber(getComputedStyle(this[0], name));
+            };
+        };
+    });
 
     return tethys;
 
