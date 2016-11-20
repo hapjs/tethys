@@ -18,6 +18,9 @@
 * [each](#each)
 * [on](#on)
 * [css](#css)
+* [style](#style)
+* [width](#width)
+* [height](#height)
 * [attr](#attr)
 * [hasClass](#class)
 * [addClass](#class)
@@ -120,25 +123,46 @@ $('button').on('click', function(){
 
 ## css
 
-设置单个样式
+查询实际样式（computedStyle）
+
+```js
+$('button').css('color'); // red
+```
+
+设置样式
 
 ```js
 $('button').css('color', 'red');
-```
-
-设置多个样式
-
-```js
 $('button').css({
     display: 'block',
     border: '1px solid green'
 });
 ```
 
-取样式
+## style
+
+查询内联样式，如果没有内联样式，返回空字符串
 
 ```js
-$('button').css('color'); // red
+$('button').style('color');
+```
+
+## width
+
+设置或查询宽度，参数或返回值均不带单位且是数值类型
+
+```js
+$('button').width();
+$('button').width(200);
+```
+
+## height
+
+设置或查询高度，参数或返回值均不带单位且是数值类型
+
+```js
+$('button').height();
+$('button').height(200);
 ```
 
 ## attr
