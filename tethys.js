@@ -54,7 +54,7 @@
         // 设置值
         return this.each(function(el) {
             keys.forEach(function(key) {
-                setter(el, key, value);
+                setter(el, key, attrs[key]);
             });
         });
     };
@@ -66,7 +66,7 @@
 
     // 获取数值部分
     function getNumber(val){
-        return +val.replace(/\D*$/g, '');
+        return +val.replace(/\D*/g, '');
     }
 
     // 查找节点，返回一个可操作的节点数组
