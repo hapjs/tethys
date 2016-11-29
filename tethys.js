@@ -16,14 +16,6 @@
 }(this, function() {
     'use strict';
 
-    function inArray(array, item){
-        var yes = false;
-        Array.prototype.forEach.call(array, function(n){
-            if(n === item) yes = true;
-        });
-        return yes;
-    }
-
     // "font-size" to "fontSize"
     function camelCase(key) {
         return key.replace(/(-([a-z]))/g, function(s, s1, s2) {
@@ -265,7 +257,7 @@
         show: function() {
             return this.each(function(el) {
                 if (el.style.display === 'none') {
-                    el.style.display = el.getAttribute('o-d') || '';
+                    el.style.display = el.getAttribute('od') || '';
                 };
             });
         },
@@ -274,7 +266,7 @@
         hide: function() {
             return this.each(function(el) {
                 if (el.style.display !== 'none') {
-                    el.setAttribute('o-d', el.style.display);
+                    el.setAttribute('od', getComputedStyle(el, 'display'));
                     el.style.display = 'none';
                 };
             });
