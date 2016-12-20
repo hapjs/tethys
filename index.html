@@ -24,9 +24,11 @@
     hello world!
     <button class="red">hello</button>
 
-    <script src="tethys.js"></script>
+    <input class="txt" type="text" />
+
+    <script src="tethys.min.js"></script>
     <script>
-        $('button').on('click', function(){
+        $('button').on('click', function(e){
 
             $('body').css({
                 'background-color': 'green'
@@ -48,6 +50,15 @@
 
             $(document.body).append('<a href="#">append a link</a>');
         });
+
+        var eventName = 'click'
+        $('input').on(eventName, function(){
+            this.value = Math.random();
+        });
+        
+        setTimeout(function(){
+            $('input').trigger(eventName);
+        }, 2000);
     </script>
 </body>
 </html>

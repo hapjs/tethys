@@ -61,6 +61,51 @@
         return +val.replace(/\D*/g, '');
     }
 
+    function fireEvent(el, eventName){
+
+        if(typeof el.dispatchEvent !== 'function') return false;
+
+        var fire = function(eventClass, opt){
+            var event;
+
+            if(typeof eventClass === 'string'){
+                event = document.createEvent(eventClass);
+                event.initEvent(eventName, true, true);
+                event.synthetic = true;
+            }else{
+                event = new eventClass(eventName, tethys.extend({
+                    view: window,
+                    bubbles: true,
+                    cancelable: true,
+                }, opt));
+            };
+            
+            return el.dispatchEvent(event, true);
+        };
+
+        switch (eventName) {
+            case 'mousedown':
+            case 'mouseup':
+            case 'mousemove':
+            case 'click':
+            case 'dblclick':
+            case 'mouseover':
+            case 'mouseout':
+            case 'mouseenter':
+            case 'mouseleave':
+            case 'contextmenu':
+                return fire(MouseEvent);
+            case 'focus':
+            case 'blur':
+                return fire(FocusEvent);
+            case 'select':
+            case 'change':
+                return fire('HTMLEvents');
+            default:
+                throw 'trigger: Couldn\'t find an event class for event "' + eventName + '"';
+        };
+    }
+
     // 查找节点，返回一个可操作的节点数组
     function tethys(selector, context) {
 
@@ -113,9 +158,10 @@
         dest = prop.shift.call(args);
 
         prop.forEach.call(args, function(src) {
+            if(!src) return;
             Object.keys(src).forEach(function(key) {
                 if (deep && typeof src[key] === 'object' && typeof dest[key] === 'object') {
-                    extend(true, dest[key], src[key]);
+                    tethys.extend(true, dest[key], src[key]);
                 } else if (typeof src[key] !== 'undefined') {
                     dest[key] = src[key];
                 };
@@ -169,6 +215,13 @@
                 events.forEach(function(event) {
                     el.addEventListener(event, fn);
                 });
+            });
+        },
+
+        // 触发事件
+        trigger: function (eventName) {
+            return this.each(function(el){
+                fireEvent(el, eventName);
             });
         },
 

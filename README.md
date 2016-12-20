@@ -1,6 +1,6 @@
 # tethys 
 
-这是一个微型的库，包含最常用的dom操作，压缩后只有`3KB`。
+这是一个微型的库，包含最常用的dom操作，压缩后只有`4KB`。
 
 ## 起源
 
@@ -17,6 +17,7 @@
 * [find](#find)
 * [each](#each)
 * [on](#on)
+* [trigger](#trigger)
 * [css](#css)
 * [style](#style)
 * [width](#width)
@@ -119,6 +120,35 @@ $('script').each(function(script, index){
 $('button').on('click', function(){
     // this.style.color = 'red';
 });
+```
+
+## trigger
+
+触发元素上绑定的事件监听函数
+
+```js
+$('button').trigger('click');
+```
+
+可以触发的事件包括：
+```
+focus
+blur
+select
+change
+```
+和所有鼠标事件：
+```
+mousedown
+mouseup
+mousemove
+click
+dblclick
+mouseover
+mouseout
+mouseenter
+mouseleave
+contextmenu
 ```
 
 ## css
