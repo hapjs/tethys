@@ -1,11 +1,11 @@
 {
   "name": "tethys",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "mini dom library",
   "main": "tethys.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "uglify": "./node_modules/uglify-js/bin/uglifyjs tethys.js --compress --mangle -o tethys.min.js"
+    "build": "./node_modules/uglify-js/bin/uglifyjs tethys.js --compress --mangle -o tethys.min.js"
   },
   "repository": {
     "type": "git",

@@ -356,6 +356,14 @@
             });
 
             return tethys(nodes);
+        },
+
+        // 延时
+        delay: function(time, fn){
+
+            setTimeout(fn.bind(this), time);
+
+            return this;
         }
     };
 

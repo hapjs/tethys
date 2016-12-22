@@ -30,6 +30,7 @@
 * [hide](#showhide)
 * [html](#html)
 * [append](#append)
+* [delay](#delay)
 
 和以下静态方法：
 
@@ -265,6 +266,16 @@ $('button').html('<p>Hello world!</p>');
 
 ```js
 $('button').append('<p>Hello world!</p>');
+```
+
+## delay
+
+延时执行一个函数
+
+```js
+$('button').addClass('fade-out').delay(1000, function(){
+    this.hide();
+});
 ```
 
 ## 链式调用
