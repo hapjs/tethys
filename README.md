@@ -1,5 +1,7 @@
 # tethys 
 
+轻量级 DOM 操作库
+
 * [find](#find)
 * [each](#each)
 * [on](#on)
